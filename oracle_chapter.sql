@@ -1,4 +1,4 @@
---Создание таблиц
+--Создание таблиц для загрузки данных из csv
 CREATE TABLE f1_drivers (
 d_driverId      NUMBER(10) PRIMARY KEY,
 d_driverRef     VARCHAR2(100) ,
@@ -10,8 +10,6 @@ d_dob           DATE, --DATE
 d_nationality   VARCHAR2(100),
 d_url           VARCHAR2(100)
 )
-/
-
 /
 CREATE TABLE f1_races (
 r_raceId    NUMBER(10) PRIMARY KEY,
@@ -58,6 +56,7 @@ SELECT *
 FROM f1_results
 ORDER BY 1
 /
+--Создание финальной витрины
 SELECT  re.re_driverid as "ID гонщика",
         d.d_forename AS Имя,
         d.d_surname AS Фамилия,
@@ -89,8 +88,7 @@ WHERE   1=1
 GROUP BY re.re_driverid, d.d_forename,d.d_surname, d.d_number, d.d_dob
 ORDER BY 1 DESC
 /
-DROP TABLE f1_drivers_results
-/
+--Создание таблицы для финальной витрины
 CREATE TABLE f1_drivers_results (
 driver_id       NUMBER(10) PRIMARY KEY,
 first_name      VARCHAR2(100) ,
@@ -106,10 +104,7 @@ last_race       NUMBER(10)
 /
 SET SERVEROUTPUT ON 
 /
-DROP TABLE f1_drivers_results
-/
-DROP PROCEDURE f1_drivers_results_proc
-/
+--Создание процедуры по наполнению таблицы
 CREATE OR REPLACE PROCEDURE f1_drivers_results_proc
     IS
     CURSOR  cur_f1 IS
@@ -181,7 +176,7 @@ BEGIN
     COMMIT;
 END;
 /
-
+--Создание пакета
 create or replace PACKAGE pkg_f1_drivers_res
 AS 
     PROCEDURE f1_drivers_results_proc;
@@ -270,11 +265,6 @@ FROM f1_drivers_results
 ORDER BY 1 DESC
 
 /
-
-DELETE FROM f1_drivers_results
-
-/
-
 
  
  

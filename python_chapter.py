@@ -43,20 +43,20 @@ print(l_f1_races)
 
 l_file_csv_drivers = pd.read_csv(r'C:\Users\Эл\Desktop\F1\drivers.csv')
 print(l_file_csv_drivers)
-#l_file_csv_races = pd.read_csv(r'C:\Users\Эл\Desktop\F1\races.csv')
-#print(l_file_csv_races)
-#l_file_csv_results = pd.read_csv(r'C:\Users\Эл\Desktop\F1\results.csv')
-#print(l_file_csv_results)
+l_file_csv_races = pd.read_csv(r'C:\Users\Эл\Desktop\F1\races.csv')
+print(l_file_csv_races)
+l_file_csv_results = pd.read_csv(r'C:\Users\Эл\Desktop\F1\results.csv')
+print(l_file_csv_results)
 
 #Замена \N на 0
 
 l_result_csv_drivers = l_file_csv_drivers.replace("\\N","0")
-#l_result_csv_races = l_file_csv_races.replace("\\N","0")
-#l_result_csv_results = l_file_csv_results.replace("\\N","0")
+l_result_csv_races = l_file_csv_races.replace("\\N","0")
+l_result_csv_results = l_file_csv_results.replace("\\N","0")
 
 l_list_csv_drivers = l_result_csv_drivers.values.tolist()
-#l_list_csv_races = l_result_csv_races.values.tolist()
-#l_list_csv_results = l_result_csv_results.values.tolist()
+l_list_csv_races = l_result_csv_races.values.tolist()
+l_list_csv_results = l_result_csv_results.values.tolist()
 
 # Вставка данных в ora в таблицу f1_drivers
 
@@ -74,7 +74,7 @@ for i in l_list_csv_drivers:
         d_url    = i[8]
         ).execute()
     print(i)
-'''
+
 for j in l_list_csv_races:
     l_f1_races.insert([l_f1_races.c.r_raceid, l_f1_races.c.r_year, l_f1_races.c.r_round, l_f1_races.c.r_circuitid,
     l_f1_races.c.r_name, l_f1_races.c.r_date, l_f1_races.c.r_time, l_f1_races.c.r_url]).values(
@@ -115,7 +115,7 @@ for h in l_list_csv_results:
         ).execute()
     print(h)
 
-'''
+
 
 print('Запуск процедуры')
 
